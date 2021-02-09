@@ -30,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
         val cpass = findViewById<EditText>(R.id.registerCPass)
         val registerBtn = findViewById<Button>(R.id.registerBtn)
         val progBar = findViewById<ProgressBar>(R.id.progressBar)
+        progBar.visibility=View.GONE
 
         registerBtn.setOnClickListener {
             if(verifyFields(email.text.toString(),pass.text.toString(),cpass.text.toString())){
@@ -39,11 +40,10 @@ class RegisterActivity : AppCompatActivity() {
                 if(currentuser!=null){
                     Toast.makeText(this,"User Already Exists",Toast.LENGTH_SHORT).show()
                     progBar.visibility = View.GONE
-                    auth.signOut()
+                    //auth.signOut()
                 }
 
                 else{
-                    Toast.makeText(this,"Block ",Toast.LENGTH_SHORT).show()
                    auth.createUserWithEmailAndPassword(email.text.toString(),pass.text.toString()).addOnCompleteListener(this){task->
                        Toast.makeText(this,"${pass.text.toString()}",Toast.LENGTH_SHORT).show()
                        if(task.isSuccessful){
@@ -75,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
         val str = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
         if(email.isEmpty() or pass.isEmpty() or cpass.isEmpty()){
-            Toast.makeText(this,"Please fill all three fields",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Please fill all the three fields",Toast.LENGTH_SHORT).show()
             return false
         }
         else if(!pass.equals(cpass)){

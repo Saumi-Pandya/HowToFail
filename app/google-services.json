@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914713816673",
+    "project_id": "howtofail",
+    "storage_bucket": "howtofail.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914713816673:android:2b9a94f8d7309d98f08420",
+        "android_client_info": {
+          "package_name": "com.example.howtofail"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914713816673-afgme8im3bojcf04ru09k9hjv4ggnra6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC23nDQI3Jk7VHAAVayzA9STp7XMUsnPNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914713816673-afgme8im3bojcf04ru09k9hjv4ggnra6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
