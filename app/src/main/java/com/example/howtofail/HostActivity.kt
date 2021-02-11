@@ -8,14 +8,15 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 
 class HostActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
     lateinit var dbRef: DatabaseReference
     lateinit var dbRef2: DatabaseReference
+    lateinit var user : MutableList<User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,13 @@ class HostActivity : AppCompatActivity() {
         }
 
         doTheTestUpload()
+
+        val rBtn = findViewById<Button>(R.id.rBtn)
+
+        rBtn.setOnClickListener {
+            retrieveData()
+        }
+        
     }
 
     private fun doTheTestUpload(){
@@ -43,26 +51,40 @@ class HostActivity : AppCompatActivity() {
         val name = findViewById<EditText>(R.id.tName)
         val hobby = findViewById<EditText>(R.id.tHobby)
 
-        val Name = name.text.toString()
-        val Hobby = hobby.text.toString()
-        //val testObj = User(Name,Hobby)
         dbRef = FirebaseDatabase.getInstance().getReference("users")
         dbRef2 = FirebaseDatabase.getInstance().getReference("stories")
 
         uBtn.setOnClickListener {
-            var id = dbRef.push().key!!
-            val testObj = User("saumi","football")
+            val testObj = User(name.text.toString(),hobby.text.toString())
             dbRef.push().setValue(testObj).addOnCompleteListener {
                 Toast.makeText(this,"Done ${auth.currentUser!!.uid}",Toast.LENGTH_SHORT).show()
             }
             val testObj2=User("mike","writing")
             dbRef2.push().setValue(testObj2).addOnCompleteListener {
-                Toast.makeText(this,"Done for stories ${auth.currentUser!!.uid}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Done for stories",Toast.LENGTH_SHORT).show()
             }
         }
 
+    }
 
+    private fun retrieveData(){
+        dbRef = FirebaseDatabase.getInstance().getReference("users")
+        dbRef2 = FirebaseDatabase.getInstance().getReference("stories")
+        user = mutableListOf()
+        dbRef.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
 
+            }
 
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                for(child in snapshot.children){
+                    val us = child.getValue(User::class.java)
+                    user.add(us!!)
+                }
+            }}
+        })
+
+        Toast.makeText(this,"${user[0].name},${user[1].name}",Toast.LENGTH_LONG).show()
     }
 }
