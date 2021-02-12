@@ -1,4 +1,4 @@
-package com.example.howtofail
+package com.example.howtofail.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.howtofail.HostActivity
+import com.example.howtofail.R
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -49,7 +51,8 @@ class RegisterActivity : AppCompatActivity() {
                        if(task.isSuccessful){
                            Toast.makeText(this,"Your account has been created successfully",Toast.LENGTH_SHORT).show()
                            progBar.visibility = View.GONE
-                           val intent = Intent(this,HostActivity::class.java)
+                           val intent = Intent(this,
+                               HostActivity::class.java)
                            startActivity(intent)
                            finish()
                        }

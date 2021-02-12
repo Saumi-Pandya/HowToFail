@@ -1,4 +1,4 @@
-package com.example.howtofail
+package com.example.howtofail.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.howtofail.HostActivity
+import com.example.howtofail.R
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -24,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
         //checking if the user is logged in or not
         if(auth.currentUser!=null){
-            val intent = Intent(this,HostActivity::class.java)
+            val intent = Intent(this, HostActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -41,14 +43,14 @@ class LoginActivity : AppCompatActivity() {
 
     //sending user to registration screen
     private fun sendToRegisterScreen(){
-        val intent = Intent(this,RegisterActivity::class.java)
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 
     private fun verifyAndMoveToHomeFrag(){
         val email = findViewById<EditText>(R.id.loginEmail)
         val pass = findViewById<EditText>(R.id.loginPass)
-        val intent = Intent(this,HostActivity::class.java)
+        val intent = Intent(this, HostActivity::class.java)
 
 
         if(verifyFields(email.text.toString(),pass.text.toString())){
