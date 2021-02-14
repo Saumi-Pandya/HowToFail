@@ -3,10 +3,8 @@ package com.example.howtofail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import com.bumptech.glide.Glide
 import com.example.howtofail.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -22,6 +20,7 @@ class HostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_host)
 
+      //  supportActionBar!!.hide()
         val lgBtn = findViewById<Button>(R.id.logOut)
         val tview = findViewById<TextView>(R.id.testView)
         auth = FirebaseAuth.getInstance()
@@ -44,13 +43,16 @@ class HostActivity : AppCompatActivity() {
             retrieveData()
         }
 
+        val imgBtn = findViewById<Button>(R.id.imgBtn)
+
+        imgBtn.setOnClickListener {
+            getImagefromDatabase()
+        }
     }
 
     //code to do the test upload
     private fun doTheTestUpload(){
         val uBtn = findViewById<Button>(R.id.uBtn)
-        val title = findViewById<EditText>(R.id.tName)
-        val content = findViewById<EditText>(R.id.tHobby)
 
 
         dbRef2 = FirebaseDatabase.getInstance().getReference("stories")
@@ -91,8 +93,30 @@ class HostActivity : AppCompatActivity() {
         })
 
     }
-    
-    fun callback(sz: Int){
+
+    private fun callback(sz: Int){
         Toast.makeText(this@HostActivity,"${sz}",Toast.LENGTH_LONG).show()
+    }
+
+
+    private fun getImagefromDatabase(){
+        dbRef2 = FirebaseDatabase.getInstance().getReference("stories").child("1")
+        val iview = findViewById<ImageView>(R.id.iview)
+
+        dbRef2.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    val thisStory = snapshot.getValue(Story::class.java)
+                    val imgUrl = thisStory!!.imageUrl
+
+                    Glide.with(this@HostActivity).load(imgUrl).into(iview)
+                }
+            }
+
+        })
     }
 }
