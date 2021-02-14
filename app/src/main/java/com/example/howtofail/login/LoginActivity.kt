@@ -21,7 +21,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val mytoolbar = findViewById<Toolbar>(R.id.mytoolbar)
         supportActionBar!!.hide()
 
 
