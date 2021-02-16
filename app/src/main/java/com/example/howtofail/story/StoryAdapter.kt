@@ -1,19 +1,20 @@
-package com.example.howtofail
+package com.example.howtofail.story
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.howtofail.R
+import com.example.howtofail.Story
 
-class StoryAdapter(val stories: List<Story>,val activity: StoryActivity,val listener: OnItemClickListener):RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryAdapter(val stories: List<Story>, val activity: StoryActivity, val listener: OnItemClickListener):RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): StoryAdapter.StoryViewHolder {
+    ): StoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.story_list,parent,false)
         return StoryViewHolder(view)
     }
@@ -22,7 +23,7 @@ class StoryAdapter(val stories: List<Story>,val activity: StoryActivity,val list
         return stories.size
     }
 
-    override fun onBindViewHolder(holder: StoryAdapter.StoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
         val currStory = stories[position]
 
         with(holder){

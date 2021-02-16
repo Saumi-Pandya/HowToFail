@@ -9,6 +9,7 @@ import android.widget.Toast
 import android.widget.Toolbar
 import com.example.howtofail.HostActivity
 import com.example.howtofail.R
+import com.example.howtofail.story.StoryActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -31,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
         //checking if the user is logged in or not
         if(auth.currentUser!=null){
-            val intent = Intent(this, HostActivity::class.java)
+            val intent = Intent(this, StoryActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -55,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
     private fun verifyAndMoveToHomeFrag(){
         val email = findViewById<EditText>(R.id.loginEmail)
         val pass = findViewById<EditText>(R.id.loginPass)
-        val intent = Intent(this, HostActivity::class.java)
+        val intent = Intent(this, StoryActivity::class.java)
 
 
         if(verifyFields(email.text.toString(),pass.text.toString())){
