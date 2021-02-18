@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/story_navigation"
+    app:startDestination="@id/storyFragment">
+
+    <fragment
+        android:id="@+id/storyFragment"
+        android:name="com.example.howtofail.story.StoryFragment"
+        android:label="fragment_story"
+        tools:layout="@layout/fragment_story" >
+        <action
+            android:id="@+id/action_storyFragment_to_contentStoryFragment"
+            app:destination="@id/contentStoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contentStoryFragment"
+        android:name="com.example.howtofail.story.ContentStoryFragment"
+        android:label="fragment_content_story"
+        tools:layout="@layout/fragment_content_story" >
+        <argument
+            android:name="story"
+            app:argType="com.example.howtofail.Story" />
+    </fragment>
+</navigation>
